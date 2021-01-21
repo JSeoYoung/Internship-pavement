@@ -32,10 +32,17 @@ function onClose(evt)
 
 function onMessage(evt)
 {
-  writeToScreen("omMessage");
+  writeToScreen("onMessage");
   var message = JSON.parse(evt.data);
+
   if(message.sheet_type == 'sheet1'){
-        writeToScreen('<span style="color: green;">Response: ' + message.Date + ' ' + message.Time + ' ' + message.Temperature + ' ' + message.HeartRate + ' ' + message.Latitude + ' ' + message.Longitude + ' ' + message.Note +'</span>');
+  	writeToScreen('<span style="color: green;">Response: ' + message.Date + '	' + message.Time + '	' + message.Temperature + '	' + message.HeartRate + '	' + message.Latitude + '	' + message.Longitude + '	' + message.Note +'</span>');
+  }
+  else if(message.sheet_type == 'sheet2'){
+  	writeToScreen('<span style="color: green;">Response: ' + message.id + '	' + message.name + '	' + message.ip + '	' + message.port +'</span>');
+  }
+  else if(message.sheet_type == 'sheet3'){
+  	writeToScreen('<span style="color: green;">Response: ' + message.id + '	' + message.name + '	' + message.address + '	' + message.Tel + '	' + message.link + '	' + message.Latitude + '	' + message.Longitude + '	' + message.ip + '	' + message.port + '	' + message.note + '	' +'</span>');
   }
 //  showNotification(message);
   //websocket.close();
@@ -61,7 +68,7 @@ function request_institution()
   var message = {
       "sheet_type" : "sheet3",
   };
-
+     
   writeToScreen("SENT: " + JSON.stringify(message));
   websocket.send(JSON.stringify(message));
 }
