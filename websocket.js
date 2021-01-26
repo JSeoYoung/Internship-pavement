@@ -112,25 +112,36 @@ function check_status(message)
 {
   var temperature = Number(message.Temperature);
   var heartrate = Number(message.HeartRate);
-  var temperature_check = "Green";
-  var heartrate_check = "Green";
+  var temperature_check = "LimeGreen";
+  var heartrate_check = "LimeGreen";
   var notify_msg;
 
   //check temperature
   if(temperature < 35 || temperature >38)
 	temperature_check = "Red";
   else if(temperature >= 35 && temperature <=35.9)
-	temperature_check = "Yellow";
+	temperature_check = "Gold";
   else if(temperature >= 37.6 && temperature <= 38)
-	temperature_check = "Yellow";
+	temperature_check = "Gold";
 
   //check heartrate
   if(heartrate < 65 || heartrate > 80)
 	heartrate_check = "Red";
   else if(heartrate >=65 && heartrate <=70)
-	heartrate_check = "Yellow";
+	heartrate_check = "Gold";
   else if(heartrate >= 75 && heartrate <= 80)
-	heartrate_check = "Yellow";
+	heartrate_check = "Gold";
+
+  //status indication
+  if(temperature_check == "Red" || heartrate_check == "Red")
+        document.getElementById("status").style.backgroundColor=temperature_check;
+  else if(temperature_check == "Gold" || heartrate_check == "Gold")
+        document.getElementById("status").style.backgroundColor=temperature_check;
+  else
+        document.getElementById("status").style.backgroundColor=temperature_check;
+
+  document.getElementById("temperature").style.backgroundColor=temperature_check;
+  document.getElementById("heartRate").style.backgroundColor=heartrate_check;
 
   //notification
   if(temperature_check == "Red" && heartrate_check == "Red")
