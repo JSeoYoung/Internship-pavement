@@ -50,8 +50,32 @@ function onMessage(evt)
       
   }
   else if(message.sheet_type == 'sheet2'){
-  	//writeToScreen('<span style="color: green;">Response: ' + message.id_number + '	' + message.name + '	' + message.age + '	' + message.address +'</span>');
-	guardian_addr.push(message);
+    //writeToScreen('<span style="color: green;">Response: ' + message.id_number + '	' + message.name + '	' + message.age + '	' + message.address +'</span>');
+    var pre1 = document.createElement("p");
+    var pre2 = document.createElement("p");
+    var pre3 = document.createElement("p");
+    var pre4 = document.createElement("p");
+    var pre5 = document.createElement("p");
+    var pre6 = document.createElement("p");
+    var pre7 = document.createElement("p");
+    var pre8 = document.createElement("p");
+    pre1.innerHTML = message.id_number;
+    document.getElementById("id_num").appendChild(pre1);
+    pre2.innerHTML = message.name;
+    document.getElementById("name_info").appendChild(pre2);
+    pre3.innerHTML = message.age;
+    document.getElementById("age").appendChild(pre3);
+    pre4.innerHTML = message.address;
+    document.getElementById("add").appendChild(pre4);
+    pre5.innerHTML = message.guardian1;
+    document.getElementById("gd1").appendChild(pre5);
+    pre6.innerHTML = message.tel1;
+    document.getElementById("gda1").appendChild(pre6);
+    pre7.innerHTML = message.guardian2;
+    document.getElementById("gd2").appendChild(pre7);
+    pre8.innerHTML = message.tel2;
+    document.getElementById("gda2").appendChild(pre8);
+	  guardian_addr.push(message);
   }
   else if(message.sheet_type == 'sheet3'){
   	//writeToScreen('<span style="color: green;">Response: ' + message.id + '	' + message.name + '	' + message.address + '	' + message.Tel + '	' + message.link + '	' + message.Latitude + '	' + message.Longitude + '	' + message.ip + '	' + message.port + '	' + message.note + '	' +'</span>');
