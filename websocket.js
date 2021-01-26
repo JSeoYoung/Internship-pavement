@@ -50,7 +50,7 @@ function onMessage(evt)
       
   }
   else if(message.sheet_type == 'sheet2'){
-  //	writeToScreen('<span style="color: green;">Response: ' + message.id + '	' + message.name + '	' + message.ip + '	' + message.port +'</span>');
+  	//writeToScreen('<span style="color: green;">Response: ' + message.id_number + '	' + message.name + '	' + message.age + '	' + message.address +'</span>');
 	guardian_addr.push(message);
   }
   else if(message.sheet_type == 'sheet3'){
