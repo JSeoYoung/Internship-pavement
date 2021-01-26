@@ -1,10 +1,147 @@
 <!DOCTYPE html>
-<meta charset="utf-8" />
-<title>WebSocket Test</title>
-<link rel="stylesheet" type="text/css" href="websocket.css">
-<script src="webOSjs-0.1.0/webOS.js" charset="utf-8"></script>
-<script src="websocket.js" charset="utf-8"></script>
+<html>
 
-<h2>WebSocket Test</h2>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<div id="output"></div>
+    <title>Collapsible sidebar using Bootstrap 4</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="websocket.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap Sidebar</h3>
+            </div>
+    
+            <ul class="list-unstyled components">
+                <p>Dummy Heading</p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="content">
+            <div id="headBar">
+                <div id="status">
+                    
+                </div>
+                <div id="mapButton">
+                    <button type = "submit" >
+                        <a href = "map.html" target = "_blank"> <img src="google_map.svg" alt="" width="120px" height="120px"></a>
+                    </button>
+                </div>
+            </div>
+            <div class= currentInfo>
+                <div id="digitInfo">
+                    <div id="temperature">
+                        <div id="temp_digit">None</div>
+                        <h4>Temperature</h4>
+                        <img src="temperature.svg" alt="" width="50px" height="50px">
+                    </div>
+                    <div id="heartRate">
+                        <div id="heart_digit">None</div>
+                        <h4>Heart Rate</h4>
+                        <img src="heart.svg" alt="" width="50px" height="50px">
+                    </div>
+                </div>
+                <div id="graph">
+                    <div id="graph1">
+                        <div id="chart" class="chart" style="width: 600px; height: 400px"></div>                  
+                    </div>   
+                    <div id="graph2">
+                        <div id = "chart_t" class = "chart_t" style = "width :600px; height: 400px;"></div>
+                    </div>   
+                </div>
+            </div>
+            <div id="personalInfo">
+                <div>
+                    <h3>personal information</h3>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                   
+                    
+                </div>
+                <div>
+                    <h3>?</h3>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                    <div class="info">info</div>
+                    
+                    
+                </div>
+                <div id="map">
+                    <div id="output"></div>
+                </div>
+                
+                
+            </div>
+        </div>
+    
+    </div>
+    
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="webOSjs-0.1.0/webOS.js" charset="utf-8"></script>
+    <script src="websocket.js" charset="utf-8"></script>
+    
+</body>
+
+</html>

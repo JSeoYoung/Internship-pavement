@@ -1,23 +1,208 @@
-body {
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+.wrapper {
+    display: flex;
     width: 100%;
-    height: 100%;
-    background-color: #202020;
+    align-items: stretch;
 }
 
-div {
-    position:absolute;
-    height:100%;
-    width:100%;
-    display: table;
+#sidebar.active {
+    margin-left: -250px;
+}
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+}
+a[data-toggle="collapse"] {
+    position: relative;
 }
 
-h2 {
-    display: table-cell;
-    vertical-align: middle;
-    text-align:center;
-    color: #FFFFFF;
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
 }
 
 p {
-    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #6d7fcc;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+.currentInfo{
+    display: flex;
+    height: 450px;
+    width: 1600px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#headBar{
+    display: flex;
+    height: 120px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+#status{
+    display: flex;
+    width: 90%;
+    height: 120px;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #323332;
+    border-radius: 30px;
+}
+#mapButton{
+    display: flex;
+    width: 10%;
+    height: 120px;
+    align-items: center;
+    justify-content: center;
+}
+#digitInfo{
+    
+}
+#temperature{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+#temp_digit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#heartRate{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+#heart_digit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#graph {
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+#graph1{
+    margin: 10px;
+    width: 600px;
+    height: 400px;
+}
+#graph2{
+    margin: 10px;
+    width: 600px;
+    height: 400px;
+}
+#personalInfo{
+    width: 1600px;
+    height: 380px;
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.info{
+    margin: 10px;
+    width: 500px;
+    height: 55px;
+    border: 4px solid #323332;
+}
+#temperature{
+    width: 300px;
+    height: 200px;
+    border: 4px solid #323332;
+    border-radius: 30px;
+}
+#heartRate{
+    width: 300px;
+    height: 200px;
+    border: 4px solid #323332;
+    border-radius: 30px;
+}
+#map{
+    margin: 10px;
+    width: 500px;
+    height: 350px;
+    border: 4px solid #323332;
+}
+.chart{
+    border: 2px solid orange;
+    
+  }
+.chart_t {
+    border : 2px solid orange;
+    
 }
