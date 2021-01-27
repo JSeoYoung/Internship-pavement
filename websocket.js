@@ -4,6 +4,7 @@ var output;
 var guardian_addr = new Array();
 var institution_addr = new Array();
 var statusArr = new Array();
+var flag = 0;
 
 function init()
 {
@@ -42,8 +43,21 @@ function onMessage(evt)
   if(message.sheet_type == 'sheet1'){
   	//writeToScreen('<span style="color: green;">Response: ' + message.Date + '	' + message.Time + '	' + message.Temperature + '	' + message.HeartRate + '	' + message.Latitude + '	' + message.Longitude + '	' + message.Note +'</span>');
     statusArr.push(message);
-    if(statusArr.length == 10){  statusArr.shift();  }
+    if(statusArr.length == 10){  
+	statusArr.shift();
+	if(flag == 0){
+	    //writeToScreen('draw graph');
+	    flag = 1;
+	    drawChart_Temperature();
+	    drawChart_HeartRate();
+	}
+    }
     check_status(message);
+    if(flag == 1){
+	  //writeToScreen(flag);
+	  drawChart_Temperature();
+	  drawChart_HeartRate();
+    }
     document.getElementById("temp_digit").innerHTML='<h1>'+(Math.floor(parseFloat(message.Temperature)))+'.</h1>'+'<h3>'+(parseInt((parseFloat(message.Temperature)-Math.floor(parseFloat(message.Temperature)))*10))+'</h3>'+'<h5> °C</h5>';
     document.getElementById("heart_digit").innerHTML='<h1>'+(Math.floor(parseFloat(message.HeartRate)))+'.</h1>'+'<h3>'+(parseInt((parseFloat(message.HeartRate)-Math.floor(parseFloat(message.HeartRate)))*10))+'</h3>'+'<h5> bpm</h5>';
     
@@ -76,6 +90,8 @@ function onMessage(evt)
     pre8.innerHTML = message.tel2;
     document.getElementById("gda2").appendChild(pre8);
 	  guardian_addr.push(message);
+
+    document.getElementById("status").innerHTML='<h1>'+message.name+'</h1>';
   }
   else if(message.sheet_type == 'sheet3'){
   	//writeToScreen('<span style="color: green;">Response: ' + message.id + '	' + message.name + '	' + message.address + '	' + message.Tel + '	' + message.link + '	' + message.Latitude + '	' + message.Longitude + '	' + message.ip + '	' + message.port + '	' + message.note + '	' +'</span>');
@@ -207,213 +223,71 @@ function showNotification(message)
       });
 }
 
+google.charts.load('current', {packages : ['corechart', 'line']});
 window.addEventListener("load", init, false);
 
-// graph1
-google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(function(){ drawChart(new_option)});
-var chartOption = function(target, maxValue, color, name){
-    this.name = name;
-    this.target = target;
-    this.data = null;
-    this.chart = null;
-    this.options = {
-      legend: { position: 'none' },
-      vAxis: {minValue:0, maxValue:maxValue},
-      hAxis: {
-        textStyle: {
-          fontSize: 11
-        }
-      },
-      colors: [color],
-      animation: {
-        duration: 500,
-        easing: 'in',
-        startup: true
-      }
-    }
+// graph
+function drawChart_Temperature() {
+    //writeToScreen('drawChart_Temperature');
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Time');
+    data.addColumn('number', '');
+    data.addRows([
+	[statusArr[0].Time, Number(statusArr[0].Temperature)],
+	[statusArr[1].Time, Number(statusArr[1].Temperature)],
+	[statusArr[2].Time, Number(statusArr[2].Temperature)],
+	[statusArr[3].Time, Number(statusArr[3].Temperature)],
+ 	[statusArr[4].Time, Number(statusArr[4].Temperature)],
+	[statusArr[5].Time, Number(statusArr[5].Temperature)],
+	[statusArr[6].Time, Number(statusArr[6].Temperature)],
+	[statusArr[7].Time, Number(statusArr[7].Temperature)],
+	[statusArr[8].Time, Number(statusArr[8].Temperature)]
+    ]);
+    var options = {
+	title: 'Temperature',
+        titleTextStyle: {fontSize: 30, color: '#ff6600'},
+	legend: {position: 'none'},
+	hAxis: {
+	    title: 'Time'
+	},
+	vAxis: {
+	    title: 'Temperature'
+	},
+        colors: ['#ff6600']
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_t'));
+    chart.draw(data, options);
+}
+
+function drawChart_HeartRate() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Time');
+    data.addColumn('number', '');
+    data.addRows([
+	[statusArr[0].Time, Number(statusArr[0].HeartRate)],
+	[statusArr[1].Time, Number(statusArr[1].HeartRate)],
+	[statusArr[2].Time, Number(statusArr[2].HeartRate)],
+	[statusArr[3].Time, Number(statusArr[3].HeartRate)],
+	[statusArr[4].Time, Number(statusArr[4].HeartRate)],
+ 	[statusArr[5].Time, Number(statusArr[5].HeartRate)],
+	[statusArr[6].Time, Number(statusArr[6].HeartRate)],
+	[statusArr[7].Time, Number(statusArr[7].HeartRate)],
+	[statusArr[8].Time, Number(statusArr[8].HeartRate)]
+    ]);
     
-  }
-var new_option = new chartOption('chart', 80, '#FF5E00', '온도');
-      
-function drawChart(option) {
-    var o = option;
-    if(o != null){
-        //초기값일때만 처리
-        if(o.chart == null && o.data == null){
-        o.data = new google.visualization.DataTable();
-        o.data.addColumn('string', 'time');
-        o.data.addColumn('number', o.name);
-        o.data.addRow(['', 0]);
-        o.chart = new google.visualization.LineChart(document.getElementById(o.target));
-        }
+    var options = {
+	title: 'Heart Rate',
+        titleTextStyle: {fontSize: 30, color: '#0033cc'},
+        legend: {position: 'none'},
+	hAxis: {
+	    title: 'Time'
+	},
+	vAxis: {
+	    title: 'Heart Rate'
+	},
+	colors: ['#0033cc']
+    };
 
-        o.chart.draw(o.data, o.options);
-    }
-}
-function getNowTime(){
-    var d = new Date();
-    var sep = ":";
-    var hh = d.getHours();
-    var mm = d.getMinutes();
-    var ss = d.getSeconds();
-    return hh + sep + mm + sep + ss;
-}
-
-function animateRenewal(option){
-    var o = option;
-    if (o.data.getNumberOfRows() >= 10) {
-      o.data.removeRow(0);
-    }
-
-
-    var value = 0;
-    var maxValue = o.options.vAxis.maxValue;
-    if(maxValue <= 1){
-      value = Number((Math.random() * maxValue).toFixed(1));
-    }else {
-      value = Math.floor(Math.random() * maxValue);
-    }
-    o.data.insertRows(o.data.getNumberOfRows(), [[getNowTime(), value]]);
-    drawChart(o);
-  }
-setInterval(function(){
-    animateRenewal(new_option);
-  }, 1000);
-
-//graph2
-google.charts.load('current', {packages : ['corechart']});
-google.charts.setOnLoadCallback(function(){ drawChart(T_option) });
-google.charts.setOnLoadCallback(function(){ drawChart(H_option) });
-
-var chartOption = function(target, maxValue, color, name) {
-    this.name = name;
-    this.target = target;
-    this.data = null;
-    this.chart = null;
-    this.options = {
-        curveType : 'function',
-        legend : { position : 'none' },
-        vAxis : { minValue : 0, maxValue : maxValue },
-        hAxis : {
-            textStyle : {
-                fontSize : 11
-            }
-        },
-        colors : [color],
-        animation : {
-            duration : 500,
-            easing : 'in',
-            startup : true
-        }
-    }
-}
-var T_option = new chartOption('chart_t', 36, 'orange', 'Temperature');
-
-function drawChart( option ) {
-    var o = option;
-    if( o != null ) {
-        if( o.chart == null && o.data == null ) {
-            o.data = new google.visualization.DataTable();
-            o.data.addColumn( 'string', 'time' );
-            o.data.addColumn( 'number', o.name );
-            o.data.addRow( ['', 0] );
-            o.chart = new google.visualization.LineChart(document.getElementById(o.target));
-        }
-        o.chart.draw( o.data, o.options );
-    }
-}
-
-function animateRenewal( option ) {
-    var o = option;
-    if( o.data.getNumberOfRows() >= 10) {
-        o.data.removeRow(0);
-    }
-    var value = 0;
-    var maxValue = o.options.vAxis.maxValue;
-
-    /* update Value */
-    value = 36.5;
-
-    o.data.insertRows(o.data.getNumberOfRows(), [[getNowTime(), value]]);
-    drawChart(o);
-}
-
-setInterval(function() {
-    animateRenewal(T_option);
-}, 2000);
-
-function getNowTime() {
-    var d = new Date();
-    var sep = ":";
-    var hh = d.getHours();
-    var mm = d.getMinutes();
-    var ss = d.getSeconds();
-    return hh + sep + mm + sep + ss;
-}
-var chartOption = function(target, maxValue, color, name) {
-    this.name = name;
-    this.target = target;
-    this.data = null;
-    this.chart = null;
-    this.options = {
-        curveType : 'function',
-        legend : { position : 'none' },
-        vAxis : { minValue : 0, maxValue : maxValue },
-        hAxis : {
-            textStyle : {
-                fontSize : 11
-            }
-        },
-        colors : [color],
-        animation : {
-            duration : 500,
-            easing : 'in',
-            startup : true
-        }
-    }
-}
-
-var H_option = new chartOption('chart_h', 70, 'red', 'Heart_Rate');
-
-function drawChart( option ) {
-    var o = option;
-    if( o != null ) {
-        if( o.chart == null && o.data == null ) {
-            o.data = new google.visualization.DataTable();
-            o.data.addColumn( 'string', 'time' );
-            o.data.addColumn( 'number', o.name );
-            o.data.addRow( ['', 0] );
-            o.chart = new google.visualization.LineChart(document.getElementById(o.target));
-        }
-        o.chart.draw( o.data, o.options );
-    }
-}
-
-function animateRenewal( option ) {
-    var o = option;
-    if( o.data.getNumberOfRows() >= 10) {
-        o.data.removeRow(0);
-    }
-    var value = 0;
-    var maxValue = o.options.vAxis.maxValue;
-
-    /* update Value */
-    value = 75;
-
-    o.data.insertRows(o.data.getNumberOfRows(), [[getNowTime(), value]]);
-    drawChart(o);
-}
-
-setInterval(function() {
-    animateRenewal(H_option);
-}, 2000);
-
-function getNowTime() {
-    var d = new Date();
-    var sep = ":";
-    var hh = d.getHours();
-    var mm = d.getMinutes();
-    var ss = d.getSeconds();
-    return hh + sep + mm + sep + ss;
+    var chart = new google.visualization.LineChart(document.getElementById('chart_h'));
+    chart.draw(data, options);
 }
