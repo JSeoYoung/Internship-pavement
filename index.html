@@ -17,6 +17,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src ="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBFeh3zpn-fBusJIgFKQsBp3xyfvCwJMo&callback=initMap&libraries=&v=weekly" type="text/javascript"></script>
 </head>
 
 <body>
@@ -74,9 +75,15 @@
                     
                 </div>
                 <div id="mapButton">
-                    <button type = "submit"  style="border:0px; background-color: white;">
-                        <a href = "map.html" target = "_blank"> <img src="google_map.svg" alt="" width="120px" height="120px"></a>
-                    </button>
+                    <input type="checkbox" id="popup">
+                    <label for="popup"><img src="google_map.svg" id="popimg" width="120px" height="120px" alt=""></label>
+                    <div>
+                        <div>
+                            <div id="map_popup"></div>
+                            <label for="popup"></label>
+                        </div>
+                        <label for="popup"></label>
+                    </div>
                 </div>
             </div>
             <div class= currentInfo>
@@ -139,6 +146,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="webOSjs-0.1.0/webOS.js" charset="utf-8"></script>
     <script src="websocket.js" charset="utf-8"></script>
+    
     
 </body>
 
