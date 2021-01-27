@@ -294,7 +294,18 @@ function drawChart_HeartRate() {
 // google map
 function make_map(message){
   var locations = [
-    ['Current Location',message.Latitude,message.Longitude]
+    ['Current Location',message.Latitude,message.Longitude],
+
+    ['Fatima_Hos </br></br> +82539407114 </br></br>   <a href="http://www.fatima.or.kr" target="_blank"> http://www.fatima.or.kr/ </a>',35.88402226665041, 128.62415167808481],
+  
+    ['Knu_Hos </br></br> +8216665114 </br></br> <a href="http://knuh.kr/"  target="_blank"> http://knuh.kr/ </a>', 35.866194121464105, 128.60516778417195],
+  
+    ['Gyemeung_Hos </br></br>+8215776622 </br></br><a href="http://daegu.dsmc.or.kr/"  target="_blank"> http://daegu.dsmc.or.kr/  </a>', 35.87019220696926, 128.5832486272517],
+  
+    ['Youngnam_Hos </br></br>+8215223114 </br></br><a href="https://yumc.ac.kr:8443/yumc/index.do"  target="_blank"> https://yumc.ac.kr:8443/yumc/index.do  </a> ', 35.84758646699615, 128.58481619581255],
+  
+    ['DaeguKatolic_Hos </br></br>+8216880077 </br></br><a href="http://www.dcmc.co.kr/index.asp/"  target="_blank">http://www.dcmc.co.kr/index.asp </a>', 35.843869410552706, 128.56802455533528]
+  
   ];
   
   
