@@ -9,7 +9,7 @@ var flag = 0;
 function init()
 {
   setWebSocket();
-  setInterval(request_status,10000);
+  setInterval(request_status,5000);
 }
 
 function setWebSocket()
@@ -59,7 +59,7 @@ function onMessage(evt)
     }
     document.getElementById("temp_digit").innerHTML='<h1>'+(Math.floor(parseFloat(message.Temperature)))+'.</h1>'+'<h3>'+(parseInt((parseFloat(message.Temperature)-Math.floor(parseFloat(message.Temperature)))*10))+'</h3>'+'<h5> °C</h5>';
     document.getElementById("heart_digit").innerHTML='<h1>'+(Math.floor(parseFloat(message.HeartRate)))+'.</h1>'+'<h3>'+(parseInt((parseFloat(message.HeartRate)-Math.floor(parseFloat(message.HeartRate)))*10))+'</h3>'+'<h5> bpm</h5>';
-    
+    make_map(message);
       
   }
   else if(message.sheet_type == 'sheet2'){
@@ -292,28 +292,18 @@ function drawChart_HeartRate() {
 }
 
 // google map
-function make_map(){
+function make_map(message){
   var locations = [
-
-    ['Fatima_Hos </br></br> +82539407114 </br></br>   <a href="http://www.fatima.or.kr" target="_blank"> http://www.fatima.or.kr/ </a>',35.88402226665041, 128.62415167808481],
-  
-    ['Knu_Hos </br></br> +8216665114 </br></br> <a href="http://knuh.kr/"  target="_blank"> http://knuh.kr/ </a>', 35.866194121464105, 128.60516778417195],
-  
-    ['Gyemeung_Hos </br></br>+8215776622 </br></br><a href="http://daegu.dsmc.or.kr/"  target="_blank"> http://daegu.dsmc.or.kr/  </a>', 35.87019220696926, 128.5832486272517],
-  
-    ['Youngnam_Hos </br></br>+8215223114 </br></br><a href="https://yumc.ac.kr:8443/yumc/index.do"  target="_blank"> https://yumc.ac.kr:8443/yumc/index.do  </a> ', 35.84758646699615, 128.58481619581255],
-  
-    ['DaeguKatolic_Hos </br></br>+8216880077 </br></br><a href="http://www.dcmc.co.kr/index.asp/"  target="_blank">http://www.dcmc.co.kr/index.asp </a>', 35.843869410552706, 128.56802455533528]
-  
+    ['Current Location',message.Latitude,message.Longitude]
   ];
   
   
   
   var map = new google.maps.Map(document.getElementById('map_popup'), {
   
-    zoom: 12,
+    zoom: 17,
   
-    center: new google.maps.LatLng(35.88897505249533, 128.61024605348553 ),
+    center: new google.maps.LatLng(message.Latitude, message.Longitude),
   
     mapTypeId: google.maps.MapTypeId.ROADMAP
   
