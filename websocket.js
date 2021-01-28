@@ -184,15 +184,21 @@ function check_status(message)
   document.getElementById("heartRate").style.backgroundColor=heartrate_check;
 
   //notification
-  if(temperature_check == "Red" && heartrate_check == "Red")
+  if(temperature_check == "Red" && heartrate_check == "Red"){
 	notify_msg = "Warning!!\n\nThere is a problem with body temperature and heart rate.";
+	alert(notify_msg);
 	//showNotification(notify_msg);
-  else if(temperature_check == "Red")
+  }
+  else if(temperature_check == "Red"){
 	notify_msg = "Warning!!\n\nThere is a problem with body temperature.";
+	alert(notify_msg);
 	//showNotification(notify_msg);
-  else if(heartrate_check == "Red")
+  }
+  else if(heartrate_check == "Red"){
 	notify_msg = "Warning!!\n\nThere is a problem with heart rate.";
+	alert(notify_msg);
 	//showNotification(notify_msg);
+  }
  // writeToScreen(notify_msg);
 
  // writeToScreen('+++++++'+temperature_check+'  '+heartrate_check);
