@@ -8,8 +8,9 @@ var flag = 0;
 
 function init()
 {
+  //output = document.getElementById("graph1");	
   setWebSocket();
-  setInterval(request_status,5000);
+  setInterval(request_status,10000);
 }
 
 function setWebSocket()
@@ -38,9 +39,9 @@ function onMessage(evt)
 {
   //writeToScreen("onMessage");
   var message = JSON.parse(evt.data);
-
+  //writeToScreen(message.sheet_type);
   if(message.sheet_type == 'sheet1'){
-  	//writeToScreen('<span style="color: green;">Response: ' + message.Date + '	' + message.Time + '	' + message.Temperature + '	' + message.HeartRate + '	' + message.Latitude + '	' + message.Longitude + '	' + message.Note +'</span>');
+    //writeToScreen('<span style="color: green;">Response: ' + message.Date + '	' + message.Time + '	' + message.Temperature + '	' + message.HeartRate + '	' + message.Latitude + '	' + message.Longitude + '	' + message.Note +'</span>');
     statusArr.push(message);
     if(statusArr.length == 10){  
 	statusArr.shift();
@@ -185,13 +186,13 @@ function check_status(message)
   //notification
   if(temperature_check == "Red" && heartrate_check == "Red")
 	notify_msg = "Warning!!\n\nThere is a problem with body temperature and heart rate.";
-	//showNotification(notify_msg);
+	showNotification(notify_msg);
   else if(temperature_check == "Red")
 	notify_msg = "Warning!!\n\nThere is a problem with body temperature.";
-	//showNotification(notify_msg);
+	showNotification(notify_msg);
   else if(heartrate_check == "Red")
 	notify_msg = "Warning!!\n\nThere is a problem with heart rate.";
-	//showNotification(notify_msg);
+	showNotification(notify_msg);
  // writeToScreen(notify_msg);
 
  // writeToScreen('+++++++'+temperature_check+'  '+heartrate_check);
