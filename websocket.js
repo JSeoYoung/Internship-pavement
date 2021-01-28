@@ -186,13 +186,13 @@ function check_status(message)
   //notification
   if(temperature_check == "Red" && heartrate_check == "Red")
 	notify_msg = "Warning!!\n\nThere is a problem with body temperature and heart rate.";
-	showNotification(notify_msg);
+	//showNotification(notify_msg);
   else if(temperature_check == "Red")
 	notify_msg = "Warning!!\n\nThere is a problem with body temperature.";
-	showNotification(notify_msg);
+	//showNotification(notify_msg);
   else if(heartrate_check == "Red")
 	notify_msg = "Warning!!\n\nThere is a problem with heart rate.";
-	showNotification(notify_msg);
+	//showNotification(notify_msg);
  // writeToScreen(notify_msg);
 
  // writeToScreen('+++++++'+temperature_check+'  '+heartrate_check);
